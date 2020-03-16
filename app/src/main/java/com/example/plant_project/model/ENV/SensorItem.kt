@@ -10,6 +10,7 @@ class SensorItem(private var sensor: Sensor? = null):
     Subject {
     private var hum: Double? = null
     private var temp: Double? = null
+    private var soil:Double? = null
     private var second: Int? = null
     private var hour: Int? = null
     private var minute: Int? = null
@@ -33,6 +34,9 @@ class SensorItem(private var sensor: Sensor? = null):
     fun getMinute(): Int? {
         return this.minute
     }
+    fun getSoil(): Double? {
+        return this.soil
+    }
 
     override fun registerObserver(observer: Observer) {
         this.observer.add(observer)
@@ -54,7 +58,7 @@ class SensorItem(private var sensor: Sensor? = null):
         var i = 0
         while (i < this.observer.size){
             val observer = this.observer[i]
-            observer.update(sensor,temp,hum,second,hour,minute)
+            observer.update(sensor,temp,soil,hum,hour,minute,second)
             i++
         }
     }
@@ -66,7 +70,8 @@ class SensorItem(private var sensor: Sensor? = null):
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 hum = dataSnapshot.child("humidity").getValue(Double::class.java)
                 temp = dataSnapshot.child("temperature").getValue(Double::class.java)
-                var s:List<String> = dataSnapshot.child("time").getValue(String::class.java)!!.split(':')
+                soil = dataSnapshot.child("soil").getValue(Double::class.java)
+                val s:List<String> = dataSnapshot.child("time").getValue(String::class.java)!!.split(':')
                 hour = s.get(0).toInt()
                 minute = s.get(1).toInt()
                 second = s.get(2).toInt()
@@ -78,18 +83,5 @@ class SensorItem(private var sensor: Sensor? = null):
             }
         })
 
-    }
-    fun setENV(sensor: Sensor?, temp: Double?, hum: Double?, second: Int?, minute: Int?, hour: Int?){
-        this.sensor = sensor
-        this.temp = temp
-        this.hum = hum
-        this.temp = temp
-        this.second = second
-        this.minute = minute
-        this.hour = hour
-        envChange()
-    }
-    fun getOb(): Int? {
-        return this.observer.size
     }
 }

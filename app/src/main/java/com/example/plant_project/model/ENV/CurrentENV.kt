@@ -1,19 +1,23 @@
 package com.example.plant_project.model.ENV
 
+import android.util.Log
 import android.widget.TextView
 
 class CurrentENV(private var textTmp: TextView,private var textHum: TextView,private var textTime: TextView,private var textDate: TextView):
     Observer {
 
-
+    companion object{
+        public var listSensor: MutableList<SensorItem> = ArrayList()
+    }
     public var temp = 0.00
     override fun update(
         sensor: Sensor?,
         temp: Double?,
+        soil: Double?,
         hum: Double?,
-        second: Int?,
         hour: Int?,
-        minute: Int?
+        minute: Int?,
+        second: Int?
     ) {
         if (temp != null) {
            textTmp.text = temp.toString()
@@ -23,4 +27,5 @@ class CurrentENV(private var textTmp: TextView,private var textHum: TextView,pri
             textDate.text = sensor!!.getDate()
         }
     }
+
 }
