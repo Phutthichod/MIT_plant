@@ -20,6 +20,15 @@ class SensorLog(
         fun envChange(){
                 notifyObserver()
         }
+        fun setDate(date:String){
+                Log.d("update date",date)
+                if(date != this.date){
+
+                        this.date = date
+                        waitSensorUpdate()
+                }
+
+        }
 
         override fun notifyObserver() {
 
@@ -33,7 +42,6 @@ class SensorLog(
                 }
         }
         fun waitSensorUpdate(){
-
                 val database = FirebaseDatabase.getInstance()
                 val myRef = database.getReference("log_env/"+date)
                 Log.d("jjjjjjjjjjjjjjj", "ssssssssssssssssssss")

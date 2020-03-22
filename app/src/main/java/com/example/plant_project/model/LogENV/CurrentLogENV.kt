@@ -21,56 +21,22 @@ class CurrentLogENV(private var graph:GraphView,private  var self:Activity):
     override fun update(
         sensorItemLogs: MutableList<SensorItemLog>
     ) {
-        Log.d("loooooooooooooo","update")
-        graph.viewport.isXAxisBoundsManual = true
-        graph.viewport.isScalable = true
-        graph.viewport.isScrollable = true
-        graph.legendRenderer.isVisible = true
-        graph.legendRenderer.align = LegendRenderer.LegendAlign.TOP
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getGridLabelRenderer().setLabelFormatter( DateAsXAxisLabelFormatter(self));
-        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
-//        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getGridLabelRenderer().setHumanRounding(false);
-        graph.getGridLabelRenderer().setLabelFormatter(object : DefaultLabelFormatter() {
-            override fun formatLabel(value: Double, isValueX: Boolean): String {
-                if (isValueX) {
-                    val formatter: Format = SimpleDateFormat("HH:mm:ss")
-
-                    return formatter.format(value)
-                }
-                return super.formatLabel(value, isValueX)
-            }
-        })
+        Log.d("logggggggggg","update")
         graph.removeAllSeries()
+
+
         val series_soil = creatSeries("soil","#fcba03")
         val series_temp = creatSeries("soil","#03fc39")
         val calendar = Calendar.getInstance()
         calendar.set(2020, 3, 22, 5, 30, 2)
         var d1 = calendar.time
-
-        var j = 0
-//        calendar.set(2020, 3, 22, 1, 0, 0)
-//        d1 = calendar.time
-//        graph.getViewport().setMinX(d1.time.toDouble())
-//        calendar.set(2020, 3, 22, 23, 30, 0)
-//        graph.getViewport().setMaxX(d1.time.toDouble())
         for (i in sensorItemLogs) {
-
             calendar.set(2020, 3, 22, i.getHour()!!, i.getMinute()!!, i.getSecond()!!)
             d1 = calendar.time
             series_soil.appendData(DataPoint(d1,i.getSoil()!!.toDouble()),true,100)
             series_temp.appendData(DataPoint(d1,i.getTemp()!!.toDouble()),true,100)
-//            if(j == 0)  graph.getViewport().setMinX(d1.time.toDouble());
-//            if(j == sensorItemLogs.size-1)  graph.getViewport().setMaxX(d1.time.toDouble());
-            j++
         }
-        calendar.set(2020, 3, 22, 24, 0, 0)
-        d1 = calendar.time
-        graph.getViewport().setMaxX(d1.time.toDouble());
-        calendar.set(2020, 3, 22, 1, 0, 0)
-        d1 = calendar.time
-        graph.getViewport().setMinX(d1.time.toDouble());
+
         graph.addSeries(series_soil)
 //        graph.addSeries(series_temp)
      }

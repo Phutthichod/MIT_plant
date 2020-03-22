@@ -5,5 +5,8 @@ class Sensor(
         fun getDate(): String? {
                 return date
         }
+        fun setDate(date:String){
+                this.date = date
+        }
 
 }

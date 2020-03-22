@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import co.ceryle.segmentedbutton.SegmentedButtonGroup
@@ -12,7 +13,12 @@ import com.example.plant_project.model.ENV.Sensor
 import com.example.plant_project.model.ENV.SensorItem
 import com.example.plant_project.model.LogENV.CurrentLogENV
 import com.example.plant_project.model.LogENV.SensorLog
+import com.example.plant_project.model.LogPump.HistoryPumn
+import com.example.plant_project.model.LogPump.PumnLog
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.LegendRenderer
@@ -55,6 +61,8 @@ class MainActivity : AppCompatActivity() {
         val sensor1 = SensorItem(sensor)
         sensor1.registerObserver(cENV)
         sensor1.waitSensorUpdate()
+//        Log.d("date",dateUpdate)
+
 //        pump
 //        val pump = Pump()
 //        val CP = CurrentPumn(text_pump)
@@ -69,8 +77,40 @@ class MainActivity : AppCompatActivity() {
 
 
         var graph : GraphView = findViewById(R.id.graph) as GraphView
+        graph.viewport.isXAxisBoundsManual = true
+        graph.viewport.isScalable = true
+        graph.viewport.isScrollable = true
+        graph.legendRenderer.isVisible = true
+        graph.legendRenderer.align = LegendRenderer.LegendAlign.TOP
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getGridLabelRenderer().setLabelFormatter( DateAsXAxisLabelFormatter(this));
+        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+//        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getGridLabelRenderer().setHumanRounding(false);
+        graph.getGridLabelRenderer().setLabelFormatter(object : DefaultLabelFormatter() {
+            override fun formatLabel(value: Double, isValueX: Boolean): String {
+                if (isValueX) {
+                    val formatter: Format = SimpleDateFormat("HH:mm:ss")
+
+                    return formatter.format(value)
+                }
+                return super.formatLabel(value, isValueX)
+            }
+        })
+        val calendar = Calendar.getInstance()
+        var d1 = calendar.time
+        calendar.set(2020, 3, 22, 24, 0, 0)
+        d1 = calendar.time
+        graph.getViewport().setMaxX(d1.time.toDouble());
+        calendar.set(2020, 3, 22, 1, 0, 0)
+        d1 = calendar.time
+        graph.getViewport().setMinX(d1.time.toDouble());
 
 
+        val eLog = SensorLog("22-3-2020")
+        val cLog = CurrentLogENV(graph,this@MainActivity)
+        eLog.registerObserver(cLog)
+        eLog.waitSensorUpdate()
         val segment = findViewById<SegmentedButtonGroup>(R.id.segmentgroup);
 //        var x:Double = 0.0
         segment.setOnClickedButtonPosition { i ->
@@ -79,9 +119,42 @@ class MainActivity : AppCompatActivity() {
             myRef.setValue(i+1)
         }
 
-        val eLog = SensorLog("19-3-2020")
-        val cLog = CurrentLogENV(graph,this)
-        eLog.registerObserver(cLog)
-        eLog.waitSensorUpdate()
+
+
+//        val pLog = PumnLog("19-3-2020")
+//        val hPumn = HistoryPumn(graph,this)
+//        pLog.registerObserver(hPumn)
+//        pLog.waitSensorUpdate()
+
+        val database = FirebaseDatabase.getInstance()
+        val dateRef =  database.getReference("date")
+        var dateUpdate:String? = ""
+        dateRef.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dateUpdate = dataSnapshot.getValue(String::class.java)
+                eLog.setDate(dateUpdate!!)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+            }
+        })
+        val timeRef = database.getReference("time")
+        timeRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                var time: String? = dataSnapshot.getValue(String::class.java)
+                dateText.text = "update $dateUpdate $time "
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+            }
+        })
+
+
+
+
+
     }
 }
