@@ -108,7 +108,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/soil"
+            android:id="@+id/hum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -162,7 +162,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/hum"
+            android:id="@+id/soil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

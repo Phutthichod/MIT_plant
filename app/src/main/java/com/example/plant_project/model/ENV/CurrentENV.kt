@@ -28,17 +28,17 @@ class CurrentENV(private var progressTmp: CircularProgressBar,private var textTm
                 setProgressWithAnimation(temp.toFloat(), 1500) // =1.5s
                 progressMax = 50f
             }
-            textTmp.text = temp.toString()
+            textTmp.text = temp.toString()+" *C"
             progressHum.apply {
                 progress = 40f
                 setProgressWithAnimation(hum!!.toFloat(), 1500) // =1.5s
-                progressMax = 40f
+                progressMax = 100f
             }
-            textHum.text = hum.toString()
+            textHum.text = hum.toString()+"%"
             progressSoil.apply {
                 progress = 40f
                 setProgressWithAnimation(soil!!.toFloat(), 1500) // =1.5s
-                progressMax = 40f
+                progressMax = 90f
             }
             textSoil.text = soil.toString()
 //            textHum.text = hum.toString()
