@@ -2,85 +2,275 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical"
+    android:weightSum="7"
     tools:context=".MainActivity">
 
-<!--    <fragment-->
-<!--        android:id="@+id/nav_host"-->
-<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:navGraph="@navigation/nav_graph"-->
-<!--        app:defaultNavHost="true"/>-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="166dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="10dp"
+                android:text="TEMPERRATURE"
+                android:textAllCaps="true"></TextView>
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/circularProgressBar1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cpb_background_progressbar_color="#c2ebcd"
+                app:cpb_background_progressbar_width="10dp"
+                app:cpb_progress_direction="to_left"
+                app:cpb_progressbar_color="#32563c"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="false"></com.mikhaellopez.circularprogressbar.CircularProgressBar>
 
 
-    <TextView
-        android:id="@+id/temp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="182dp"
-        android:layout_marginLeft="182dp"
-        android:layout_marginTop="344dp"
-        android:layout_marginEnd="170dp"
-        android:layout_marginRight="170dp"
-        android:text="TextView"
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="10 C"
+            android:textSize="20dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="166dp"
+        android:layout_height="170dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/cardView1"
+        tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/hum"
-        android:layout_width="56dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="184dp"
-        android:layout_marginLeft="184dp"
-        android:layout_marginTop="96dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginLeft="176dp"
-        android:layout_marginTop="68dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hum" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="10dp"
+                android:text="Air humidity"
+                android:textAllCaps="true"></TextView>
 
-    <TextView
-        android:id="@+id/text_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="152dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/circularProgressBar2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cpb_background_progressbar_color="#c2ebcd"
+                app:cpb_background_progressbar_width="10dp"
+                app:cpb_progress_direction="to_left"
+                app:cpb_progressbar_color="#32563c"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="false" />
 
-    <TextView
-        android:id="@+id/text_pump"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="184dp"
-        android:layout_marginLeft="184dp"
-        android:layout_marginTop="100dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/logpumn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="TextView"
+        <TextView
+            android:id="@+id/soil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="70 %"
+            android:textSize="20dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="166dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView1"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="10dp"
+                android:text="Soil MoiVWXUe"
+                android:textAllCaps="true"></TextView>
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/circularProgressBar3"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cpb_background_progressbar_color="#c2ebcd"
+                app:cpb_background_progressbar_width="10dp"
+                app:cpb_progress_direction="to_left"
+                app:cpb_progressbar_color="#32563c"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="false" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="60 %"
+            android:textSize="20dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="155dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="10dp"
+                android:text="Panel Orerations"
+                android:textAllCaps="true"></TextView>
+
+            <co.ceryle.segmentedbutton.SegmentedButtonGroup
+                android:id="@+id/segmentgroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:sbg_animateSelector="accelerate"
+                app:sbg_animateSelectorDuration="700"
+                app:sbg_backgroundColor="#e8ebe8"
+                app:sbg_dividerColor="#00833f"
+                app:sbg_dividerPadding="10dp"
+                app:sbg_dividerRadius="5dp"
+                app:sbg_dividerSize="1dp"
+                app:sbg_position="1"
+                app:sbg_radius="10dp"
+                app:sbg_ripple="true"
+                app:sbg_rippleColor="#00833f"
+                app:sbg_selectorColor="#00833f"
+                app:sbg_selectorTextColor="#e8ebe8"
+                app:sbg_shadow="true"
+                app:sbg_shadowElevation="3dp"
+                app:sbg_shadowMargin="4dp">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ON"
+                    android:textAllCaps="true"
+                    android:textSize="10sp"
+                    tools:text="@android:string/VideoView_error_button"
+                    tools:visibility="visible" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AUTO"
+                    android:textAllCaps="true"
+                    android:textSize="10sp"
+                    tools:visibility="visible" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OFF"
+                    android:textAllCaps="true"
+                    android:textSize="10sp" />
+            </co.ceryle.segmentedbutton.SegmentedButtonGroup>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        tools:ignore="MissingConstraints"></com.jjoe64.graphview.GraphView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

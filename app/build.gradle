@@ -7,11 +7,11 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.example.plant_project"
         minSdkVersion 15
-        targetSdkVersion 29
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -37,4 +37,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    implementation 'com.github.ceryle:SegmentedButton:v1.0'
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+    implementation 'com.jjoe64:graphview:4.2.2'
 }

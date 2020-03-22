@@ -2,8 +2,10 @@ package com.example.plant_project.model.ENV
 
 import android.util.Log
 import android.widget.TextView
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
-class CurrentENV(private var textTmp: TextView,private var textHum: TextView,private var textTime: TextView,private var textDate: TextView):
+class CurrentENV(private var progressTmp: CircularProgressBar,private var textTmp:TextView, private var progressHum: CircularProgressBar,private var textHum:TextView
+                 ,private var textSoil:TextView, private var progressSoil: CircularProgressBar):
     Observer {
 
     companion object{
@@ -19,12 +21,30 @@ class CurrentENV(private var textTmp: TextView,private var textHum: TextView,pri
         minute: Int?,
         second: Int?
     ) {
+        Log.d("update",temp.toString())
         if (temp != null) {
-           textTmp.text = temp.toString()
+            progressTmp.apply {
+                progress = 40f
+                setProgressWithAnimation(temp.toFloat(), 1500) // =1.5s
+                progressMax = 50f
+            }
+            textTmp.text = temp.toString()
+            progressHum.apply {
+                progress = 40f
+                setProgressWithAnimation(hum!!.toFloat(), 1500) // =1.5s
+                progressMax = 40f
+            }
             textHum.text = hum.toString()
-            val time = "update "+hour.toString()+":"+minute.toString()+":"+second.toString()
-            textTime.text = time
-            textDate.text = sensor!!.getDate()
+            progressSoil.apply {
+                progress = 40f
+                setProgressWithAnimation(soil!!.toFloat(), 1500) // =1.5s
+                progressMax = 40f
+            }
+            textSoil.text = soil.toString()
+//            textHum.text = hum.toString()
+//            val time = "update "+hour.toString()+":"+minute.toString()+":"+second.toString()
+//            textTime.text = time
+//            textDate.text = sensor!!.getDate()
         }
     }
 

@@ -14,36 +14,32 @@ class SensorLog(
         }
 
         override fun registerObserver(observerlog: ObserverLog) {
-                this.observerlog.add(observerlog)
-        }
+                var a = this.observerlog.add(observerlog)
 
-        override fun deleteObserver(observerlog: ObserverLog) {
-                val i: Int? = this.observerlog.indexOf(observerlog)
-                if (i != null) {
-                        if(i > 0) {
-                                this.observerlog.removeAt(i)
-                        }
-                }
         }
         fun envChange(){
                 notifyObserver()
         }
 
         override fun notifyObserver() {
+
                 var i = 0
+                Log.d("register",this.observerlog.size.toString())
                 while (i < this.observerlog.size){
                         val observer = this.observerlog[i]
+                        Log.d("notify","update")
                         observer.update(sensorItemLogs)
                         i++
                 }
         }
         fun waitSensorUpdate(){
-                observerlog.clear()
+
                 val database = FirebaseDatabase.getInstance()
                 val myRef = database.getReference("log_env/"+date)
                 Log.d("jjjjjjjjjjjjjjj", "ssssssssssssssssssss")
                 myRef.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                sensorItemLogs.clear()
                                 for(data in dataSnapshot.children){
                                         val hum = data.child("humidity").getValue(Double::class.java)
                                         val temp = data.child("temperature").getValue(Double::class.java)
